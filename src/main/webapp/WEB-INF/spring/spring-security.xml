@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security
+    					http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- Permite utilizar annotations nas classes Java -->
+    <security:global-method-security secured-annotations="enabled" />
+    
+	<security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/login" access="permitAll" />
+        <security:intercept-url pattern="/**" access="isAuthenticated()" />
+        <security:form-login login-page="/login" always-use-default-target="true" 
+            default-target-url="/home" authentication-failure-url="/login?error" />
+        <security:logout logout-success-url="/login?logout" logout-url="/logout" />
+        <security:csrf />
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="usuarioService">
+            <security:password-encoder hash="md5" />
+            
+            <!-- Também é possível utilizar sql diretamente para carregar as informações de login: 
+            
+            <security:jdbc-user-service
+                
+				data-source-ref="dataSource"
+				users-by-username-query="SELECT nome_usuario, senha, is_ativo FROM usuario WHERE nome_usuario=?"
+				authorities-by-username-query="SELECT u.nome_usuario, p.tipo
+			        FROM usuario u, permissao p, usuario_permissao up
+			        WHERE u.id = up.usuario_id AND up.permissao_id = p.id AND u.nome_usuario = ?" /> -->
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+</beans>
