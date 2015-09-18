@@ -5,11 +5,14 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Classe representando um usuário do sistema.
@@ -19,26 +22,31 @@ import javax.persistence.Table;
 public class Usuario {
 
 	@Id
+	@GeneratedValue
 	private Integer id;
-	@Column(name = "nome_usuario")
-	private String nomeUsuario;
+	
+	@NotBlank(message = "{mensagem.erro.senha.vazio}")
 	private String senha;
+	
+	@NotBlank(message = "{mensagem.erro.nome.vazio}")
 	private String nome;
+	
+	@NotBlank(message = "{mensagem.erro.email.vazio}")
+	@Column(unique = true)
 	private String email;
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(inverseJoinColumns = @JoinColumn(name = "permissao_id"))
 	private List<Permissao> permissoes;
+	
 	@Column(name = "is_ativo")
 	private boolean isAtivo;
 	
+	@Column(name = "chave_ativacao_cadastro")
+	private String chaveAtivacaoCadastro;
+	
 	public Integer getId() {
 		return id;
-	}
-	public String getNomeUsuario() {
-		return nomeUsuario;
-	}
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
 	}
 	public String getSenha() {
 		return senha;
@@ -69,5 +77,11 @@ public class Usuario {
 	}
 	public void setAtivo(boolean isAtivo) {
 		this.isAtivo = isAtivo;
+	}
+	public String getChaveAtivacaoCadastro() {
+		return chaveAtivacaoCadastro;
+	}
+	public void setChaveAtivacaoCadastro(String chaveAtivacaoCadastro) {
+		this.chaveAtivacaoCadastro = chaveAtivacaoCadastro;
 	}
 }

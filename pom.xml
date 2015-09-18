@@ -102,6 +102,13 @@
 		    <version>4.0.1.RELEASE</version>
 		</dependency>
 		
+		<!-- Dependência do Apache Commons Email -->		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.4</version>
+		</dependency>
+		
 	</dependencies>
 	
 	<!-- Configurações de build do maven. -->

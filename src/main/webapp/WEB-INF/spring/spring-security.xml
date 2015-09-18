@@ -13,26 +13,34 @@
     
 	<security:http auto-config="true" use-expressions="true">
         <security:intercept-url pattern="/login" access="permitAll" />
+        <security:intercept-url pattern="/usuario" access="permitAll" />
+        <security:intercept-url pattern="/usuario/cadastro" access="permitAll" />
+        <security:intercept-url pattern="/usuario/cadastro/ativacao" access="permitAll" />
+        <security:intercept-url pattern="/resources/**" access="permitAll" />
+        
+        <security:intercept-url pattern="/perfis/1" access="hasRole('ROLE_PERFIL1')" />
+        <security:intercept-url pattern="/perfis/2" access="hasRole('ROLE_PERFIL2')" />
+        <security:intercept-url pattern="/perfis/3" access="hasRole('ROLE_PERFIL3')" />
+        
         <security:intercept-url pattern="/**" access="isAuthenticated()" />
-        <security:form-login login-page="/login" always-use-default-target="true" 
+        
+        <security:access-denied-handler error-page="/WEB-INF/views/403.jsp" />
+        
+        <security:form-login login-page="/login" username-parameter="email" password-parameter="senha" always-use-default-target="true" 
             default-target-url="/home" authentication-failure-url="/login?error" />
         <security:logout logout-success-url="/login?logout" logout-url="/logout" />
         <security:csrf />
     </security:http>
 
     <security:authentication-manager>
-        <security:authentication-provider user-service-ref="usuarioService">
-            <security:password-encoder hash="md5" />
-            
-            <!-- Também é possível utilizar sql diretamente para carregar as informações de login: 
-            
+        <security:authentication-provider >
+            <security:password-encoder hash="bcrypt" />
             <security:jdbc-user-service
-                
 				data-source-ref="dataSource"
-				users-by-username-query="SELECT nome_usuario, senha, is_ativo FROM usuario WHERE nome_usuario=?"
-				authorities-by-username-query="SELECT u.nome_usuario, p.tipo
-			        FROM usuario u, permissao p, usuario_permissao up
-			        WHERE u.id = up.usuario_id AND up.permissao_id = p.id AND u.nome_usuario = ?" /> -->
+				users-by-username-query="SELECT email, senha, is_ativo FROM usuario WHERE email = ?"
+				authorities-by-username-query="SELECT u.email, concat('ROLE_', p.tipo)  
+					FROM usuario u, permissao p, usuario_permissao up 
+					WHERE u.id = up.usuario_id AND up.permissao_id = p.id AND u.email = ?" />
         </security:authentication-provider>
     </security:authentication-manager>
 

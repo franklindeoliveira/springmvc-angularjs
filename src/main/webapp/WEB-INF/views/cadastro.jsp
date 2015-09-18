@@ -24,56 +24,44 @@
 	    <![endif]-->
 	    
 	    <!-- CSS -->
-		
+		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/global.css" />"></link>
 	    
 	</head>
 	<body>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4 col-sm-4 col-md-offset-4 col-sm-offset-4">
-					<fmt:message key="bemvindo"/>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 col-sm-4 col-md-offset-4 col-sm-offset-4">
 					<div class="row">
 						<div class="col-md-12">
-							<h1>Login</h1>
+							<h1>Cadastro</h1>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<c:if test="${param.error != null}">
-								<div class="alert alert-danger" role="alert">Credênciais inválidas.</div>
-						    </c:if>
-						    <c:if test="${param.logout != null}">
-						        <div class="alert alert-success" role="alert">Logout efetuado com sucesso.</div>
-						    </c:if>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<form action="login" method="post">
-								<form:errors path="usuario.email"/>
-								<div class="form-group">
+							<form action="cadastro" method="post" data-toggle="validator">
+								<form:errors cssClass="mensagemErro" path="usuario.nome" ></form:errors>
+								<div class="form-group has-feedback">
+									<label for="nome">Nome</label>
+						        	<input class="form-control" name="nome" id="nome" class="form-control" placeholder="Nome" value="${usuario.nome}" required>
+						        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							    </div>
+							    <form:errors cssClass="mensagemErro" path="usuario.email"></form:errors>
+								<div class="form-group has-feedback">
 									<label for="email">Email</label>
-						        	<input name="email" id="email" class="form-control" placeholder="Email">
+						        	<input name="email" id="email" class="form-control" placeholder="Email" value="${usuario.email}" required>
+						        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 							    </div>
-							    <div class="form-group">
+							    <form:errors cssClass="mensagemErro" path="usuario.senha"></form:errors>
+							    <div class="form-group has-feedback">
 							    	<label for="senha">Senha</label>
-							    	<span>(<form:errors cssClass="mensagem.erro" path="usuario.senha"/>)</span>
-						        	<input type="password" id="senha" name="senha" class="form-control" placeholder="Senha">
+						        	<input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" value="${usuario.senha}" required>
+						        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 							    </div>
-					    		<input class="btn btn-default" type="submit" value="Entrar">
+							    <input class="btn btn-default" type="submit" value="Cadastrar">
 							    <input type="hidden"
 							        name="${_csrf.parameterName}"
 							        value="${_csrf.token}"/>
 							</form>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<span>Ainda não possui uma conta? <a href="./usuario/cadastro">Cadastre-se</a></span>
 						</div>
 					</div>
 				</div>
@@ -90,10 +78,13 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script type="application/javascript" src="<c:url value="/resources/lib/bootstrap-3.3.5/js/bootstrap.min.js" />"></script>
 		
+		<!-- Bootstrap Validator -->
+		<script type="application/javascript" src="<c:url value="/resources/lib/validator.min.js" />"></script>
+		
 		<!-- JS -->
 		
-		<!-- JS da tela de login -->
-		<script type="application/javascript" src="<c:url value="/resources/js/login.js" />"></script>
+		<!-- JS da tela de cadastro de usuários -->
+		<script type="application/javascript" src="<c:url value="/resources/js/cadastro.js" />"></script>
 		
 	</body>
 </html>

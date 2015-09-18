@@ -1,0 +1,14 @@
+.mensagemErro {
+	color: red;
+}
+
+.mensagemSucesso {
+	color: blue;
+}
+
+/* Posiciona o ícone required nos labels de formulários */
+form label:after {
+    color: red;
+    content: ' *';
+}
+

@@ -1,4 +1,3 @@
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 	<head>
@@ -10,10 +9,10 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    
 		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/lib/bootstrap-3.3.5/css/bootstrap.min.css" />"></link>
+		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/lib/bootstrap-3.3.5/bootstrap.min.css" />"></link>
 		
 		<!-- Optional theme -->
-		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/lib/bootstrap-3.3.5/css/bootstrap-theme.min.css" />"></link>
+		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/lib/bootstrap-3.3.5/bootstrap-theme.min.css" />"></link>
 		
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,24 +31,7 @@
 				<div class="col-md-4 col-md-offset-4">
 					<div class="row">
 						<div class="col-md-12">
-							<h1>Home</h1>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-md-offset-4">
-					<div class="row">
-						<div class="col-md-12">
-							<p>
-								Bem vindo <sec:authentication property="principal.username" />!
-							</p>
-							<div class="form-group">
-								<form action="logout" method="post">
-								    <input type="hidden"
-								        name="${_csrf.parameterName}"
-								        value="${_csrf.token}"/>
-								    <button type="submit" class="btn">Log out</button>
-								</form>
-							</div>
+							<h1>MODELO</h1>
 						</div>
 					</div>
 				</div>
@@ -64,7 +46,7 @@
 		
 		<!-- Bootstrap -->
 		<!-- Latest compiled and minified JavaScript -->
-		<script type="application/javascript" src="<c:url value="/resources/lib/bootstrap-3.3.5/js/bootstrap.min.js" />"></script>
+		<script type="application/javascript" src="<c:url value="/resources/lib/bootstrap-3.3.5/bootstrap.min.js" />"></script>
 		
 		<!-- JS -->
 		

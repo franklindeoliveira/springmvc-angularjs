@@ -22,5 +22,17 @@
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+	
+	<!-- Configuração para mensagens internacionalizadas.
+	Para alternar entre as mensagens basta enviar uma requisição informando como parâmetro
+	o 'locale', por exemplo, \?locale=pt_BR para português e \?locale=en_US para inglês -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	    <property name="basename" value="/WEB-INF/mensagens/i18n" />
+	</bean>
+	<mvc:interceptors>
+		<!-- Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+	</mvc:interceptors>
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
 
 </beans>

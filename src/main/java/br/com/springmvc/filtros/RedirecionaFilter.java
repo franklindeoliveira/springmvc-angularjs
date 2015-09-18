@@ -14,16 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Filter responsável por tratar todos os redirecionamentos de URL da aplicação.
- * TODO: Criar uma classe generica de filtros.
  */
 @WebFilter("/*")
 public class RedirecionaFilter implements Filter {
-
-	/**
-	 * Método executado quando o filtro é carregado pelo container.
-	 */
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {}
 
 	/**
 	 * Processa as requisições segundo a configuração da anotação <code>WebFilter</code>.
@@ -41,21 +34,25 @@ public class RedirecionaFilter implements Filter {
          */
         String path = request.getServletPath();
 
-
-        // Se foi acessado a raiz da aplicação...
-        if (path.equals("/")) {
-        	// ... fazemos o redirecionamento para a home.
-        	response.sendRedirect(request.getContextPath() + "/home");
-        } else {// senão, continuamos com o processamento da requisição.
-        	chain.doFilter(req, res);
+        if (path.equals("/")) {// Se foi acessado a raiz da aplicação...
+			// ..., redireciona para a página home.
+			response.sendRedirect(request.getContextPath() + "/home");
+        } else {
+        	chain.doFilter(req, res);// Senão, prosegue com o processamento da requisição.
         }
-		
+
 	}
+	
+	/**
+	 * Método executado quando o filtro é carregado pelo container.
+	 */
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {}
 	
 	/**
 	 * Método executado quando o filtro é descarregado pelo container.
 	 */
 	@Override
 	public void destroy() {}
-
+	
 }
