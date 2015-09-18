@@ -1,2 +1,2 @@
-# springmvc-jpa-springdata-postgres
-Spring Data utilizando Hibernate como implementação da JPA e banco de dados PostgreSQL.
+# springmvc-angularjs
+Aplicação web completa com Spring MVC, Spring Data JPA, Spring Security e AngularJS.
